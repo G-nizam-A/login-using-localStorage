@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+          // Function to check if the user is logged in
+          function checkIfLoggedIn() {
+            const loggedInUser = localStorage.getItem("loggedInUser");
+
+            // If user is not logged in, redirect to login page
+            if (!loggedInUser) {
+                window.location.href = "login.html";
+            }
+
+            // If user is logged in, return the user object
+            return JSON.parse(loggedInUser);
+        }
+
+    </script>
+</head>
+
+<body>
+    <div>
+        <h1 id="welcomeMessage"></h1>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <script>
+      
+
+        // Function to display the username on the welcome page
+        function displayUsername() {
+            const user = checkIfLoggedIn();
+            const welcomeMessage = document.getElementById("welcomeMessage");
+
+            if (user) {
+                welcomeMessage.innerText = "Welcome, " + user.username + "!";
+            }
+        }
+
+        // Function to clear the session and redirect to the login page
+        function logout() {
+            localStorage.removeItem("loggedInUser");
+            window.location.href = "login.html";
+        }
+
+        // Call the displayUsername function on page load
+        displayUsername();
+    </script>
+</body>
+
+</html>
